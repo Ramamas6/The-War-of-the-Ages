@@ -1,3 +1,8 @@
+"""
+Manages the home page of the game
+"""
+
+
 import pygame
 
 

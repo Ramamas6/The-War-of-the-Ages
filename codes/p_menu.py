@@ -1,5 +1,8 @@
-import pygame
+"""
+Manages the "escape" page of the game
+"""
 
+import pygame
 
 class Menu :
 

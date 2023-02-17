@@ -1,3 +1,7 @@
+"""
+Manage the game
+"""
+
 import pygame
 import time
 from p_base import *

@@ -7,9 +7,10 @@ import pygame
 
 
 pygame.init()
-#clock = pygame.time.Clock()
-
-
+"""
+Clock not working
+clock = pygame.time.Clock()
+"""
 
 # JEU
 class Main :
@@ -19,7 +20,7 @@ class Main :
         self.fps = 60
         self.pressed = {}
         self.pressed_button = {}
-        # 1 : Accueil ; 2 : Continuer ; 3 : Nouvelle partie
+        # 1 : Accueil ; 2 : Continuer ; 3 : Nouvelle partie ; 4 : Game Over ; 5 : Victoire
         self.etape = 1
         self.accueil = Accueil (self.screen)
         self.menu = Menu (self.screen)
@@ -36,6 +37,7 @@ class Main :
         self.annuler_rect.x = self.confirmer_rect.x + 400
         self.annuler_rect.y = self.confirmer_rect.y
 
+    """ Print a confirm message on the screen """
     def game_confirmer (self, message) :
         pygame.draw.rect(main.screen, (255, 255, 255), [self.confirmer_rect.x, self.confirmer_rect.y - 100, 810, 600])
         txt = (pygame.font.SysFont("arial" , 100, bold=True)).render("Confirmer ?", 1, (0,0,0))
@@ -86,7 +88,7 @@ image = pygame.image.load("../assets/icon.png")
 pygame.display.set_icon(image)
 
 
-# Lancement du jeu
+""" Launch of the game """
 main = Main (screen)
 running = True
 
@@ -102,7 +104,4 @@ while (running) :
     else :
         running = accueil (main)
 
-
-
 pygame.quit()
-# Faire une sauvegarde

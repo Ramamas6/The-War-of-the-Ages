@@ -1,3 +1,7 @@
+"""
+Manage the spawn emplacements
+"""
+
 import pygame
 from p_soldats import *
 from p_troupes_ennemi import *
@@ -20,6 +24,7 @@ class Emplacement () :
         self.health_fois = 0
 
         self.vitesse = 0
+        self.range = 50
         self.respawn = 0
         self.spawn = True
 
@@ -164,6 +169,7 @@ class Emplacement () :
             self.vitesse_max = 20
             self.respawn = 7
             self.respawn_min = 3
+            self.range = 300
         elif (nom == "snipeur") :
             self.attaque = 10
             self.health = 100
@@ -171,6 +177,7 @@ class Emplacement () :
             self.vitesse_max = 15
             self.respawn = 8
             self.respawn_min = 4
+            self.range = 500
         elif (nom == "tank") :
             self.attaque = 5
             self.health = 400
@@ -185,6 +192,7 @@ class Emplacement () :
             self.vitesse_max = 10
             self.respawn = 15
             self.respawn_min = 10
+            self.range = 300
         elif (nom == "rapide") :
             self.attaque = 10
             self.health = 200
@@ -192,8 +200,6 @@ class Emplacement () :
             self.vitesse_max = 30
             self.respawn = 13
             self.respawn_min = 8
-
-
 
     def actualise (self) :
         self.image = pygame.transform.scale(pygame.image.load("../assets/armee/"+self.nom+"/"+str(self.epoque)+"_base.png"), (100, 100))

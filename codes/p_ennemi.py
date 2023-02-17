@@ -1,3 +1,7 @@
+"""
+Manage enemi base
+"""
+
 import pygame
 from p_troupes_ennemi import *
 

@@ -18,33 +18,35 @@ class Soldat (pygame.sprite.Sprite) :
         self.attaque = emp.calcul_attaque ()
         self.attaque_speed = 1
         self.epoque = emp.epoque
+        self.range = emp.range
 
     def afficher (self, screen) :
         screen.blit(self.image, self.rect)
         pygame.draw.rect(screen, (150, 150, 150), [self.rect.x, self.rect.y - 40, 100, 5])
         pygame.draw.rect(screen, (0, 255, 0), [self.rect.x, self.rect.y - 40, 100 * self.health // self.max_health, 5])
 
+    """ Action function """
     def agir (self, main) :
         # Collision avec une troupe :
-        a = pygame.sprite.spritecollide(self, main.game.ennemi.soldats, False, pygame.sprite.collide_mask)
-        if (a and self.vitesse > 0) :
-            self.rect.x = self.rectx + main.game.deplacement
-            if (main.game.timer.temps0 - self.temps >= self.attaque_speed) :
-                self.temps = main.game.timer.temps0
-                v = main.game.ennemi.damage_soldat (a[0], self.attaque)
-                main.game.monnaie += v
-                main.game.xp = min (main.game.xp_max, main.game.xp + v)
-            return True
+        for enemi in main.game.ennemi.soldats :
+            if (enemi.rectx < self.rectx + self.range and self.vitesse > 0) :
+                self.rect.x = self.rectx + main.game.deplacement
+                if (main.game.timer.temps0 - self.temps >= self.attaque_speed) :
+                    self.temps = main.game.timer.temps0
+                    v = main.game.ennemi.damage_soldat (enemi, self.attaque)
+                    main.game.monnaie += v
+                    main.game.xp = min (main.game.xp_max, main.game.xp + v)
+                return True
         # Collision avec une défense :
-        a = pygame.sprite.spritecollide(self, main.game.ennemi.defenses, False, pygame.sprite.collide_mask)
-        if (a and self.vitesse > 0) :
-            self.rect.x = self.rectx + main.game.deplacement
-            if (main.game.timer.temps0 - self.temps >= self.attaque_speed) :
-                self.temps = main.game.timer.temps0
-                main.game.ennemi.damage_defense (a[0], self.attaque)
-            return True
+        for defense in main.game.ennemi.defenses :
+            if (defense.rectx < self.rectx + self.range and self.vitesse > 0) :
+                self.rect.x = self.rectx + main.game.deplacement
+                if (main.game.timer.temps0 - self.temps >= self.attaque_speed) :
+                    self.temps = main.game.timer.temps0
+                    main.game.ennemi.damage_defense (defense, self.attaque)
+                return True
         # Collision avec la base :
-        elif (self.rectx >= main.game.ennemi.rectx - 100) :
+        if (self.rectx >= main.game.ennemi.rectx - 100 - self.range) :
             self.rect.x = self.rectx + main.game.deplacement
             if (main.game.timer.temps0 - self.temps >= self.attaque_speed) :
                 self.temps = main.game.timer.temps0

@@ -116,17 +116,17 @@ class Defense (pygame.sprite.Sprite) :
         pygame.draw.rect(screen, (150, 150, 150), [self.rect.x, self.rect.y - 10, 100, 5])
         pygame.draw.rect(screen, (215, 0, 0), [self.rect.x, self.rect.y - 10, 100 * self.health // self.max_health, 5])
 
+    """ Action function """
     def agir (self, main) :
-        self.rect.x = self.rectx + main.game.deplacement
-        if (main.game.timer.temps0 - self.temps >= self.attaque_speed) :
+        self.rect.x = self.rectx + main.game.deplacement # Moove
+        if (main.game.timer.temps0 - self.temps >= self.attaque_speed) : # Possibility to attack
             for soldat in main.game.soldats :
                 if (soldat.rectx > self.rectx - self.range) :
-                    self.temps = main.game.timer.temps0
-                    if (self.nom[1] == 'z') :
+                    self.temps = main.game.timer.temps0 # Initialize attack timer
+                    if (self.nom[1] == 'z') : # For futur zone attack
                         main.game.damage_soldat (soldat, self.attaque)
                     else :
                         main.game.damage_soldat (soldat, self.attaque)
-                        return True
         return True
 
 ##
