@@ -127,6 +127,7 @@ class Defense (pygame.sprite.Sprite) :
                         main.game.damage_soldat (soldat, self.attaque)
                     else :
                         main.game.damage_soldat (soldat, self.attaque)
+                    return True
         return True
 
 ##

@@ -2,9 +2,7 @@
 Manages the home page of the game
 """
 
-
 import pygame
-
 
 class Accueil :
 
@@ -35,17 +33,17 @@ class Accueil :
         # Fond
         screen.blit(self.background, (0, 0))
         # Titre
-        if (etape == 4) :
+        if (etape == "GameOver") :
             self.titre = (pygame.font.SysFont("algerian", 180, bold=True)).render ("Game Over", 1, (255,0,0))
             screen.blit(self.titre, self.titre_rect)
-        elif (etape == 5) :
+        elif (etape == "Victory") :
             self.titre = (pygame.font.SysFont("algerian", 180, bold=True)).render ("Victoire", 1, (255,0,0))
             screen.blit(self.titre, self.titre_rect)
         else :
             self.titre = (pygame.font.SysFont("algerian", 180, bold=True)).render ("Towns Age", 1, (255,0,0))
             screen.blit(self.titre, self.titre_rect)
         # Boutons
-        if (etape == 1) :
+        if (etape == "Home") :
             self.continuer = pygame.transform.scale(pygame.image.load("../assets/continuer.png"), (450, 188))
             screen.blit(self.continuer, self.continuer_rect)
         else :
@@ -89,12 +87,12 @@ def accueil (main) :
             elif (event.type == pygame.MOUSEBUTTONUP and event.button == 1) :
                 if (main.accueil.continuer_rect.collidepoint(event.pos) and main.pressed_button[event.button] == "continuer") :
                     main.pressed_button[event.button] = ""
-                    if (main.etape == 1) :
-                        main.etape = 2
+                    if (main.etape == "Home") :
+                        main.etape = "Continue"
                         return True
                 elif (main.accueil.nouvelle_partie_rect.collidepoint(event.pos) and main.pressed_button[event.button] == "nouv") :
                     main.pressed_button[event.button] = ""
-                    main.etape = 3
+                    main.etape = "NewGame"
                     return True
                 elif (main.accueil.quitter_rect.collidepoint(event.pos) and main.pressed_button[event.button] == "quitter") :
                     main.pressed_button[event.button] = ""

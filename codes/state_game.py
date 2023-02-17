@@ -4,10 +4,10 @@ Manage the game
 
 import pygame
 import time
-from p_base import *
-from p_emplacement import *
-from p_soldats import *
-from p_ennemi import *
+from class_base import *
+from class_spot import *
+from class_soldier import *
+from class_ennemi import *
 
 
 class Timer :
@@ -241,10 +241,10 @@ def jeu (main) :
         main.game.ennemi.actualise(main)
 
         if (main.game.base.health <= 0) :
-            main.etape = 4
+            main.etape = "GameOver"
             return True
         elif (main.game.ennemi.health <= 0) :
-            main.etape = 5
+            main.etape = "Victory"
             return True
 
         # Affichage de la map

@@ -3,8 +3,8 @@ Manage the spawn emplacements
 """
 
 import pygame
-from p_soldats import *
-from p_troupes_ennemi import *
+from class_soldier import *
+from class_ennemi_soldier import *
 
 
 class Emplacement () :

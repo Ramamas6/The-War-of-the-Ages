@@ -31,7 +31,7 @@ class Menu :
 
     def afficher (self, main) :
         # Fond d'écran
-        if (main.etape < 4) :
+        if (main.etape != "GameOver" and main.etape != "Victory") :
             main.screen.blit(main.accueil.background, (0, 0))
         # Titre
         main.screen.blit(self.titre, self.titre_rect)
@@ -74,11 +74,11 @@ class Menu :
                 elif (event.type == pygame.MOUSEBUTTONUP and event.button == 1) :
                     if (self.accueil_rect.collidepoint(event.pos) and main.pressed_button[event.button] == "accueil") :
                         main.pressed_button[event.button] = ""
-                        main.etape = 1
+                        main.etape = "Home"
                         return True
                     elif (self.a_remplacer_rect.collidepoint(event.pos) and main.pressed_button[event.button] == "a_remplacer") :
                         main.pressed_button[event.button] = ""
-                        main.etape = 1
+                        main.etape = "Home"
                         return True
                     elif (self.quitter_rect.collidepoint(event.pos) and main.pressed_button[event.button] == "quitter") :
                         main.pressed_button[event.button] = ""

@@ -1,7 +1,7 @@
-from p_accueil import *
-from p_menu import *
-from p_continuer import *
-from p_game import *
+from state_home import *
+from state_menu import *
+from state_continuer import *
+from state_game import *
 
 import pygame
 
@@ -20,8 +20,7 @@ class Main :
         self.fps = 60
         self.pressed = {}
         self.pressed_button = {}
-        # 1 : Accueil ; 2 : Continuer ; 3 : Nouvelle partie ; 4 : Game Over ; 5 : Victoire
-        self.etape = 1
+        self.etape = "Home"
         self.accueil = Accueil (self.screen)
         self.menu = Menu (self.screen)
         self.game = Game (self.screen)
@@ -93,12 +92,11 @@ main = Main (screen)
 running = True
 
 while (running) :
-    # 1 : Accueil ; 2 : Continuer ; 3 : Nouvelle partie ; 4 : Game Over ; 5 : Victoire
-    if (main.etape == 1) :
+    if (main.etape == "Home") :
         running = accueil (main)
-    elif (main.etape == 2) :
+    elif (main.etape == "Continue") :
         running = jeu (main)
-    elif (main.etape == 3) :
+    elif (main.etape == "NewGame") :
         main.game.new_game (main.screen)
         running = jeu (main)
     else :
